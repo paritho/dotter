@@ -1,0 +1,13 @@
+game-dot span {
+  border: 1px solid black;
+  border-radius: 50%;
+  background-color: black;
+  display: inline-block;
+}
+.board {
+    width: 100%;
+    border: 1px solid black;
+    border-radius: .25rem;
+    padding:.25em;
+    margin:auto;
+}
