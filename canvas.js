@@ -31,6 +31,10 @@ class GameCanvas extends HTMLElement {
     this.render();
   }
 
+  getAllDots(){
+    return this.dots;
+  }
+
   getDotByXY(x, y) {
     return this.dots[this.getIndexByXY(x,y)];
   }

@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <game-canvas resolution="24" size="600"></game-canvas>
+    <game-canvas resolution="24" size="1000"></game-canvas>
     <script type="module">
         import Dotter from "./dotter.js";
         const config = {
@@ -28,7 +28,7 @@
             updotter(dotter){
                 const randomX = Math.floor(Math.random() * 24);
                 const randomY = Math.floor(Math.random()* 16 + 4);
-                // dotter.sotter(randomX, randomY, {color:"red"});
+                dotter.sotter(randomX, randomY, {color:"red"});
                 setTimeout(()=>{
                     dotter.end()
                 }, 5000);

@@ -17,7 +17,8 @@ const Dotter = (config) => {
             gotter:this._gotter,
             sotter:this._sotter, 
             multiSotter: this._multiSotter,
-            rangeSotter:this._rangeSotter
+            rangeSotter:this._rangeSotter,
+            allDots: this.getAllDots
           });
       }
       canvas.render();
@@ -48,6 +49,9 @@ const Dotter = (config) => {
     },
     _rangeSotter(range, props){
       canvas.setDotPropsInRange(range, props);
+    },
+    _allDots(){
+      return canvas.getAllDots();
     },
     _gotter(x, y) {
       const idx = canvas.getIndexByXY(x, y);
