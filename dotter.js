@@ -18,7 +18,7 @@ const Dotter = (config) => {
             sotter:this._sotter, 
             multiSotter: this._multiSotter,
             rangeSotter:this._rangeSotter,
-            allDots: this.getAllDots
+            allDots: this._AllDots
           });
       }
       canvas.render();
@@ -30,7 +30,8 @@ const Dotter = (config) => {
           sotter:this._sotter, 
           multiSotter: this._multiSotter,
           rangeSotter:this._rangeSotter,
-          end:this._endDotter.bind(this)
+          end:this._endDotter.bind(this),
+          allDots:this._allDots
         });
       canvas.render();
       if (!this._gameOver) {
