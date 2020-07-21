@@ -7,10 +7,10 @@ class GameCanvas extends HTMLElement {
   }
 
   connectedCallback() {
-    this.resolution = this.getAttribute("resolution") || 24;
+    this.resolution = +this.getAttribute("resolution") || 24;
     this.width = this.getAttribute("size") || 800;
     this.height = this.width;
-    this.dotsize = Math.floor(+this.width / (+this.resolution * 2));
+    this.dotsize = Math.floor(+this.width / (this.resolution * 2));
     this.dotshare = Math.ceil(this.width / this.resolution);
     this.dots = Array(this.resolution * this.resolution)
                   .fill(0)
@@ -32,7 +32,9 @@ class GameCanvas extends HTMLElement {
   }
 
   getAllDots(){
-    return this.dots;
+    return this.dots.map(dot => {
+      return {x: +dot.x, y: +dot.y};
+    }); 
   }
 
   getDotByXY(x, y) {
@@ -63,10 +65,8 @@ class GameCanvas extends HTMLElement {
 
   setDotProperties(dot, props) {
     for (const prop in props) {
-      if (dot[prop]) {
         dot[prop] = props[prop];
       }
-    }
   }
 
   setMultipleDotsProperties(dots, props){
@@ -104,8 +104,12 @@ class GameCanvas extends HTMLElement {
     this.setMultipleDotsProperties(dots,props);
   }
 
+  focus(){
+    this.board.focus();
+  }
+
   makeBoard() {
-    const board = wire()`<div class="board"></div>`;
+    const board = wire()`<div class="board" tabindex="-1"></div>`;
     const styles = {
       width: this.width,
       height: this.height,

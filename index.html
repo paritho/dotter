@@ -12,6 +12,7 @@
         import Dotter from "./dotter.js";
         const config = {
             create(dotter){
+                dotter.multiSotter(dotter.allDots(), {color:'white'})
                 dotter.sotter(12,12, {color: "red"})
                 const floor = {x:[0,23],y:[20,23]};
                 dotter.rangeSotter(floor,{color:"green"})
@@ -28,7 +29,8 @@
             updotter(dotter){
                 const randomX = Math.floor(Math.random() * 24);
                 const randomY = Math.floor(Math.random()* 16 + 4);
-                dotter.sotter(randomX, randomY, {color:"red"});
+                const randomScale = .75 + Math.random() * .75;
+                dotter.sotter(randomX, randomY, {color:"red",scale:randomScale});
                 setTimeout(()=>{
                     dotter.end()
                 }, 5000);

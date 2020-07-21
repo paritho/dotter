@@ -12,16 +12,19 @@ const Dotter = (config) => {
     villian: [{}],
     _gameOver: false,
     start() {
+      canvas.addEventListener('click', this._onclick);
+      canvas.addEventListener('keydown',this._onkeydown);
       if (config.create && typeof config.create === "function") {
         config.create({
             gotter:this._gotter,
             sotter:this._sotter, 
             multiSotter: this._multiSotter,
             rangeSotter:this._rangeSotter,
-            allDots: this._AllDots
+            allDots: this._allDots
           });
       }
       canvas.render();
+      canvas.focus();
       requestAnimationFrame(this.gameRunner.bind(this));
     },
     gameRunner(time) {
@@ -38,7 +41,18 @@ const Dotter = (config) => {
         requestAnimationFrame(this.gameRunner.bind(this));
       }
     },
+    _onclick(e){
+      console.log('click');
+      config.onclick(e)
+    },
+    _onkeydown(e){
+      console.log('keydown')
+      //TODO: make this send just the key?
+      config.onkeydown(e);
+    },
     _endDotter(){
+      canvas.removeEventListener('click',this._onclick);
+      canvas.removeEventListener('keypress',this._onkeydown);
       this._gameOver = true;
     },
     _sotter(x, y, props) {

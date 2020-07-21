@@ -31,14 +31,13 @@ class GameDot extends HTMLElement {
   render() {
     const dot = wire()`<span data-x=${this.x} 
                              data-y=${this.y}
+                             style=${`width: ${this.size};
+                                      height: ${this.size};
+                                      background-color:${this.color};
+                                      border:1px solid ${this.color};
+                                      transform:scale(${this.scale});
+                                    `}
                        ></span>`;
-    const styles = {
-      border: `1px solid ${this.color}`,
-      width: this.size,
-      height: this.size,
-      backgroundColor: this.color,
-    };
-    Object.assign(dot.style, styles);
     this.html`${dot}`;
   }
 }

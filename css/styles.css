@@ -1,8 +1,9 @@
 game-dot span {
-  border: 1px solid black;
+  border: 1px solid gray;
   border-radius: 50%;
-  background-color: black;
+  background-color: gray;
   display: inline-block;
+  transition: all .5s ease;
 }
 .board {
     width: 100%;
@@ -10,4 +11,7 @@ game-dot span {
     border-radius: .25rem;
     padding:.25em;
     margin:auto;
+}
+.board:focus {
+  outline:none;
 }
