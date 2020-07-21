@@ -18,7 +18,7 @@ const Dotter = (config) => {
             sotter:this._sotter, 
             multiSotter: this._multiSotter,
             rangeSotter:this._rangeSotter,
-            allDots: this._AllDots
+            allDots: this._allDots
           });
       }
       canvas.render();
