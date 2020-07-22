@@ -10,12 +10,17 @@
     <game-canvas resolution="24" size="1000"></game-canvas>
     <script type="module">
         import Dotter from "./dotter.js";
+        const hero = {
+            x:[3],
+            y:[16, 19]
+        };
         const config = {
             create(dotter){
                 dotter.multiSotter(dotter.allDots(), {color:'white'})
                 dotter.sotter(12,12, {color: "red"})
                 const floor = {x:[0,23],y:[20,23]};
                 dotter.rangeSotter(floor,{color:"green"})
+                dotter.rangeSotter(hero, {color: "black"})
                 const clouds = [
                     // 1 cloud
                     {x:1,y:1},
@@ -27,13 +32,26 @@
                 dotter.multiSotter(clouds, {color:"blue"})
             },
             updotter(dotter){
-                const randomX = Math.floor(Math.random() * 24);
-                const randomY = Math.floor(Math.random()* 16 + 4);
-                const randomScale = .75 + Math.random() * .75;
-                dotter.sotter(randomX, randomY, {color:"red",scale:randomScale});
-                setTimeout(()=>{
-                    dotter.end()
-                }, 5000);
+                // const randomX = Math.floor(Math.random() * 24);
+                // const randomY = Math.floor(Math.random()* 16 + 4);
+                // const randomScale = .75 + Math.random() * .75;
+                // dotter.sotter(randomX, randomY, {color:"red",scale:randomScale});
+                // TODO: maybe allow props to follow the 'hero'?
+                dotter.rangeSotter(hero, {color:"black"})
+                // setTimeout(()=>{
+                //     dotter.end()
+                // }, 15000);
+            },
+            onkeydown(key){
+                if(key === "ArrowLeft"){
+                    hero.x = hero.x.map(x => --x);
+                }
+                if(key === "ArrowRight"){
+                    hero.x = hero.x.map(x => ++x);
+                }
+            },
+            onclick(dot){
+                dot.color = "purple";
             }
         };
         const dotter = Dotter(config);

@@ -42,17 +42,20 @@ const Dotter = (config) => {
       }
     },
     _onclick(e){
-      console.log('click');
-      config.onclick(e)
+      const clickedDot = e.target;
+      const data = clickedDot.dataset;
+      if(data?.type && data.type !== 'dot'){
+        return;
+      }
+      const dot = canvas.getDotByXY(data.x, data.y);      
+      config.onclick(dot)
     },
     _onkeydown(e){
-      console.log('keydown')
-      //TODO: make this send just the key?
-      config.onkeydown(e);
+      config.onkeydown(e.key);
     },
     _endDotter(){
       canvas.removeEventListener('click',this._onclick);
-      canvas.removeEventListener('keypress',this._onkeydown);
+      canvas.removeEventListener('keydown',this._onkeydown);
       this._gameOver = true;
     },
     _sotter(x, y, props) {

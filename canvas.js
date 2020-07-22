@@ -38,7 +38,7 @@ class GameCanvas extends HTMLElement {
   }
 
   getDotByXY(x, y) {
-    return this.dots[this.getIndexByXY(x,y)];
+    return this.dots[this.getIndexByXY(+x,+y)];
   }
 
   getDotByIndex(idx){
@@ -46,14 +46,14 @@ class GameCanvas extends HTMLElement {
   }
 
   getIndexByXY(x, y){
-      return x + y * this.resolution;
+      return +x + +y * this.resolution;
   }
 
   getXByIndex(idx) {
-      return idx % this.resolution;
+      return +idx % this.resolution;
   }
   getYByIndex(idx) {
-      return  Math.floor(idx / this.resolution)
+      return  Math.floor(+idx / this.resolution)
   }
 
   getXYByIndex(idx) {
@@ -82,16 +82,17 @@ class GameCanvas extends HTMLElement {
     //range = {x:[start, end], y:[start, end]}
     const xR = range.x;
     const yR = range.y;
-    if(xR.length !== yR.length){
-      console.error('Range Lengths must match');
-    }
     const xStart = xR[0],
-          xEnd = xR[1],
+          // if end isn't provided, there's only 1 element
+          xEnd = xR[1] || 0,
           yStart = yR[0],
-          yEnd = yR[1];
+          yEnd = yR[1] || 0;
     
-    const xDotRange = Array.from(Array(xEnd - xStart + 1), (_,idx)=> xStart + idx);
-    const yDotRange = Array.from(Array(yEnd - yStart + 1), (_,idx)=> yStart + idx);
+    const xSpan = xR.length > 1 ? Math.abs(xEnd - xStart) + 1 : 1;
+    const ySpan = yR.length > 1 ? Math.abs(yEnd - yStart) + 1 : 1;
+    
+    const xDotRange = Array.from(Array(xSpan), (_,idx) => xStart + idx);
+    const yDotRange = Array.from(Array(ySpan), (_,idx) => yStart + idx);
     const dots = [];
     yDotRange.forEach(y =>{
       xDotRange.forEach(x => {

@@ -22,14 +22,24 @@ class GameDot extends HTMLElement {
     return this._size;
   }
 
+  set scale(value){
+    this._scale = value;
+    this.render();
+  }
+  get scale(){
+    return this._scale;
+  }
+
   connectedCallback() {
     this.color = this.getAttribute("color") || "black";
+    this.scale = this.getAttribute('scale') || 1;
     this.x = this.getAttribute("x");
     this.y = this.getAttribute("y");
     this.render();
   }
   render() {
-    const dot = wire()`<span data-x=${this.x} 
+    const dot = wire()`<span data-type="dot"
+                             data-x=${this.x}
                              data-y=${this.y}
                              style=${`width: ${this.size};
                                       height: ${this.size};
