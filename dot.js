@@ -31,7 +31,6 @@ class GameDot extends HTMLElement {
   }
 
   connectedCallback() {
-    this.color = this.getAttribute("color") || "black";
     this.scale = this.getAttribute('scale') || 1;
     this.x = this.getAttribute("x");
     this.y = this.getAttribute("y");

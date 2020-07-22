@@ -1,61 +1,62 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/hyperhtml@latest/min.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./hyper.js"></script>
     <link href="./css/styles.css" rel="stylesheet" />
     <title>Document</title>
-</head>
-<body>
-    <game-canvas resolution="24" size="1000"></game-canvas>
+  </head>
+  <body>
+    <game-canvas resolution="24" size="1000" dotcolor="white"></game-canvas>
     <script type="module">
-        import Dotter from "./dotter.js";
-        const hero = {
-            x:[3],
-            y:[16, 19]
-        };
-        const config = {
-            create(dotter){
-                dotter.multiSotter(dotter.allDots(), {color:'white'})
-                dotter.sotter(12,12, {color: "red"})
-                const floor = {x:[0,23],y:[20,23]};
-                dotter.rangeSotter(floor,{color:"green"})
-                dotter.rangeSotter(hero, {color: "black"})
-                const clouds = [
-                    // 1 cloud
-                    {x:1,y:1},
-                    {x:1,y:2},
-                    {x:2,y:1},
-                    {x:2,y:2},
-
-                ];
-                dotter.multiSotter(clouds, {color:"blue"})
-            },
-            updotter(dotter){
-                // const randomX = Math.floor(Math.random() * 24);
-                // const randomY = Math.floor(Math.random()* 16 + 4);
-                // const randomScale = .75 + Math.random() * .75;
-                // dotter.sotter(randomX, randomY, {color:"red",scale:randomScale});
-                // TODO: maybe allow props to follow the 'hero'?
-                dotter.rangeSotter(hero, {color:"black"})
-                // setTimeout(()=>{
-                //     dotter.end()
-                // }, 15000);
-            },
-            onkeydown(key){
-                if(key === "ArrowLeft"){
-                    hero.x = hero.x.map(x => --x);
-                }
-                if(key === "ArrowRight"){
-                    hero.x = hero.x.map(x => ++x);
-                }
-            },
-            onclick(dot){
-                dot.color = "purple";
-            }
-        };
-        const dotter = Dotter(config);
-        dotter.start();
+      import Dotter from "./dotter.js";
+      let hero, cloud;
+      const config = {
+        create(dotter) {
+        //   dotter.multiSotter(dotter.allDots(), { color: "white" });
+          dotter.sotter({x:12, y:12}, { color: "red" });
+          const floor = { x: [0, 23], y: [20, 23] };
+          dotter.rangeSotter(floor, { color: "green" });
+          hero = dotter.dotForge({
+            x: [3],
+            y: [16, 19],
+            color:'black'
+          });
+          cloud = dotter.dotForge({
+              x:[1,2],
+              y:[1,2],
+              color:'blue',
+              size: 16
+          });
+          dotter.rangeSotter(cloud);
+        },
+        updotter(dotter) {
+          // const randomX = Math.floor(Math.random() * 24);
+          // const randomY = Math.floor(Math.random()* 16 + 4);
+          // const randomScale = .75 + Math.random() * .75;
+          // dotter.sotter(randomX, randomY, {color:"red",scale:randomScale});
+          // TODO: maybe allow props to follow the 'hero'?
+          dotter.rangeSotter(hero, { color: "black" });
+          // setTimeout(()=>{
+          //     dotter.end()
+          // }, 15000);
+        },
+        onkeydown(key) {
+            let newPosX;
+          if (key === "ArrowLeft") {
+            newPosX = hero.x.map((x) => --x);
+          }
+          if (key === "ArrowRight") {
+            newPosX = hero.x.map((x) => ++x);            
+          }
+          hero.moveTo(newPosX, hero.y);
+        },
+        onclick(dot) {
+          dot.color = "purple";
+        },
+      };
+      const dotter = Dotter(config);
+      dotter.start();
     </script>
-</body>
+  </body>
 </html>
