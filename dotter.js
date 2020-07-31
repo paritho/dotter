@@ -82,6 +82,8 @@ const Dotter = (config) => {
       canvas.removeEventListener("keydown", this._onkeydown);
       this._gameOver = true;
     },
+    // sotters should all be able to take just dots 
+    // with properties on them for color and size
     _sotter(dot, props) {
       dot = canvas.getDotByXY(dot.x, dot.y);
       canvas.setDotProperties(dot, props);

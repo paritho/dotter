@@ -39,6 +39,12 @@ class GameCanvas extends HTMLElement {
     dot.size = this.dotsize;
   }
 
+  // need to compare two dots
+  // should this be on the dot class?
+  isSameDot(dotA, dotB){
+
+  }
+
   getAllDots() {
     return this.dots.map((dot) => {
       return { x: +dot.x, y: +dot.y };
